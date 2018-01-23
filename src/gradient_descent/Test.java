@@ -45,7 +45,7 @@ public class Test {
     }*/
 
     public static void main(String[] args) {
-        List<MovieInfor> mVote = new ArrayList<>();
+        /*List<MovieInfor> mVote = new ArrayList<>();
 
         List<Friend> fList1 = new ArrayList<>();
         fList1.add(new Friend("A", 4));
@@ -56,7 +56,7 @@ public class Test {
         fList1.add(new Friend("F", 4));
         fList1.add(new Friend("G", 1));
 
-        MovieInfor mInfor1 = new MovieInfor(1,fList1);
+        MovieInfor mInfor1 = new MovieInfor(1, fList1);
         mVote.add(mInfor1);
 
         List<Friend> fList2 = new ArrayList<>();
@@ -68,7 +68,7 @@ public class Test {
         fList2.add(new Friend("F", 1));
         fList2.add(new Friend("G", 4));
 
-        MovieInfor mInfor2 = new MovieInfor(1,fList2);
+        MovieInfor mInfor2 = new MovieInfor(0, fList2);
         mVote.add(mInfor2);
 
         List<Friend> fList3 = new ArrayList<>();
@@ -80,8 +80,37 @@ public class Test {
         fList3.add(new Friend("F", 2));
         fList3.add(new Friend("G", 3));
 
-        MovieInfor mInfor3 = new MovieInfor(1,fList3);
+        MovieInfor mInfor3 = new MovieInfor(0, fList3);
         mVote.add(mInfor3);
+
+        new StochasticGradientDescent(mVote);*/
+
+        List<MovieInfor> mVote = new ArrayList<>();
+
+        List<Friend> fList1 = new ArrayList<>();
+        fList1.add(new Friend("A", 1));
+        MovieInfor mInfor1 = new MovieInfor(1, fList1);
+        mVote.add(mInfor1);
+
+        List<Friend> fList2 = new ArrayList<>();
+        fList2.add(new Friend("B", 2));
+        MovieInfor mInfor2 = new MovieInfor(3, fList2);
+        mVote.add(mInfor2);
+
+        List<Friend> fList3 = new ArrayList<>();
+        fList3.add(new Friend("C", 4));
+        MovieInfor mInfor3 = new MovieInfor(3, fList3);
+        mVote.add(mInfor3);
+
+        List<Friend> fList4 = new ArrayList<>();
+        fList2.add(new Friend("D", 5));
+        MovieInfor mInfor4 = new MovieInfor(2, fList4);
+        mVote.add(mInfor4);
+
+        List<Friend> fList5 = new ArrayList<>();
+        fList3.add(new Friend("E", 5));
+        MovieInfor mInfor5 = new MovieInfor(5, fList5);
+        mVote.add(mInfor5);
 
         new StochasticGradientDescent(mVote);
     }

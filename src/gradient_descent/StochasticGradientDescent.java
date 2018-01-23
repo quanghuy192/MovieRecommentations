@@ -16,8 +16,8 @@ public class StochasticGradientDescent {
         int size = friendVoteList.size();
 
         // create data
-        beta = new double[size];
-        for (int i = 0; i < size; i++) {
+        beta = new double[size + 1];
+        for (int i = 0; i < size + 1; i++) {
             beta[i] = 0.0d;
         }
 
@@ -41,7 +41,7 @@ public class StochasticGradientDescent {
             count++;
         }
 
-        learn(50);
+        learn(500);
         System.out.println("Result --------------------- ");
         for (int s = 0; s < beta.length; s++) {
             System.out.print(" " + beta[s]);
@@ -54,27 +54,28 @@ public class StochasticGradientDescent {
             double sumError = 0.0;
             for (int h = 0; h < X.length; h++) {
                 double predicate = beta[0] * 1;
-                for (int k = 1; k < beta.length; k++) {
-                    predicate += beta[k] * X[h][k - 1];
+                for (int k = 0; k < X.length; k++) {
+                    for (int c = 0; c < X[k].length; c++) {
+                        predicate += beta[k + 1] * X[k][c];
+                    }
                 }
-                double error = predicate - y[0];
+                double error = predicate - y[h];
                 sumError += error * error;
                 beta[0] = beta[0] - ALPHA * error;
 
-                for (int j = 1; j < beta.length; j++) {
-                    beta[j] = beta[j] - ALPHA * error * X[h][j - 1];
+                for (int j = 0; j < beta.length - 1; j++) {
+                    beta[j + 1] = beta[j + 1] - ALPHA * error * X[h][j];
                 }
             }
             for (int s = 0; s < beta.length; s++) {
-                System.out.print(" " + beta[s]);
+                System.out.print(" " + beta[s] + " ");
             }
+            System.out.println(" sum error = " + sumError);
             System.out.println();
             n_EPOCH--;
-            learn(n_EPOCH);
         }
     }
     /*
-
     private static double[] coef_sgd(double[][] train, double l_rate, double n_epoch) {
         double[] coefficients = {0.0, 0.0};
         for (int e = 0; e < n_epoch; e++) {
@@ -92,7 +93,6 @@ public class StochasticGradientDescent {
         }
         return coefficients;
     }
-
     private static double predict(double[] row, double[] coef) {
         double yhat = coef[0];
         for (int i = 0; i < (coef.length - 1); i++) {
