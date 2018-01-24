@@ -13,16 +13,22 @@ public class StochasticGradientDescent {
 
     public StochasticGradientDescent(List<MovieInfor> fVoteList) {
         this.friendVoteList = fVoteList;
-        int size = friendVoteList.size();
+        int sizeTrain = friendVoteList.size();
+        int sizeAttr = 0;
+
+        if (friendVoteList.get(0) != null) {
+            sizeAttr = friendVoteList.get(0).getFriendVoteList().size();
+        }
+
 
         // create data
-        beta = new double[size + 1];
-        for (int i = 0; i < size + 1; i++) {
+        beta = new double[sizeAttr + 1];
+        for (int i = 0; i < sizeAttr + 1; i++) {
             beta[i] = 0.0d;
         }
 
-        y = new int[size];
-        X = new int[size][size];
+        y = new int[sizeTrain];
+        X = new int[sizeTrain][sizeAttr];
         int count = 0;
         List<Friend> fList;
 
@@ -41,12 +47,11 @@ public class StochasticGradientDescent {
             count++;
         }
 
-        learn(500);
+        learn(1000);
         System.out.println("Result --------------------- ");
         for (int s = 0; s < beta.length; s++) {
             System.out.print(" " + beta[s]);
         }
-
     }
 
     private void learn(int n_EPOCH) {
@@ -54,14 +59,12 @@ public class StochasticGradientDescent {
             double sumError = 0.0;
             for (int h = 0; h < X.length; h++) {
                 double predicate = beta[0] * 1;
-                for (int k = 0; k < X.length; k++) {
-                    for (int c = 0; c < X[k].length; c++) {
-                        predicate += beta[k + 1] * X[k][c];
-                    }
+                for (int k = 0; k < beta.length - 1; k++) {
+                    predicate += beta[k + 1] * X[h][k];
                 }
                 double error = predicate - y[h];
                 sumError += error * error;
-                beta[0] = beta[0] - ALPHA * error;
+                beta[0] = ALPHA * error;
 
                 for (int j = 0; j < beta.length - 1; j++) {
                     beta[j + 1] = beta[j + 1] - ALPHA * error * X[h][j];
@@ -75,6 +78,11 @@ public class StochasticGradientDescent {
             n_EPOCH--;
         }
     }
+
+    public double[] getCoefficients() {
+        return beta;
+    }
+
     /*
     private static double[] coef_sgd(double[][] train, double l_rate, double n_epoch) {
         double[] coefficients = {0.0, 0.0};

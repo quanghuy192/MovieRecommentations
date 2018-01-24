@@ -31,6 +31,7 @@ public class Test {
                     coefficients[k + 1] = coefficients[k + 1] - l_rate * error * train[w][k];
                 }
             }
+            System.out.println("b0 = " + coefficients[0] + " b1 = " + coefficients[1]);
             System.out.println("EPOCH " + e + " LRATE " + l_rate + " ERR " + sum_error);
         }
         return coefficients;
@@ -44,8 +45,9 @@ public class Test {
         return yhat;
     }*/
 
+
     public static void main(String[] args) {
-        /*List<MovieInfor> mVote = new ArrayList<>();
+        List<MovieInfor> mVote = new ArrayList<>();
 
         List<Friend> fList1 = new ArrayList<>();
         fList1.add(new Friend("A", 4));
@@ -83,9 +85,20 @@ public class Test {
         MovieInfor mInfor3 = new MovieInfor(0, fList3);
         mVote.add(mInfor3);
 
-        new StochasticGradientDescent(mVote);*/
+        StochasticGradientDescent sgd = new StochasticGradientDescent(mVote);
 
-        List<MovieInfor> mVote = new ArrayList<>();
+        double[] coefficients = sgd.getCoefficients();
+        System.out.println("\n\n\n");
+
+        double[] xTrain = {5, 2, 3, 1, 2, 5, 2};
+        double sum = coefficients[0];
+        for (int i = 0; i < coefficients.length - 1; i++) {
+            sum += xTrain[i] * coefficients[i + 1];
+        }
+        System.out.println(sum);
+
+
+/*        List<MovieInfor> mVote = new ArrayList<>();
 
         List<Friend> fList1 = new ArrayList<>();
         fList1.add(new Friend("A", 1));
@@ -103,16 +116,16 @@ public class Test {
         mVote.add(mInfor3);
 
         List<Friend> fList4 = new ArrayList<>();
-        fList2.add(new Friend("D", 5));
+        fList4.add(new Friend("D", 3));
         MovieInfor mInfor4 = new MovieInfor(2, fList4);
         mVote.add(mInfor4);
 
         List<Friend> fList5 = new ArrayList<>();
-        fList3.add(new Friend("E", 5));
+        fList5.add(new Friend("E", 5));
         MovieInfor mInfor5 = new MovieInfor(5, fList5);
         mVote.add(mInfor5);
 
-        new StochasticGradientDescent(mVote);
+        new StochasticGradientDescent(mVote);*/
     }
 
 }
