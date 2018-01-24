@@ -95,8 +95,7 @@ public class Test {
         for (int i = 0; i < coefficients.length - 1; i++) {
             sum += xTrain[i] * coefficients[i + 1];
         }
-        System.out.println(sum);
-
+        System.out.println(Math.round(sum));
 
 /*        List<MovieInfor> mVote = new ArrayList<>();
 
