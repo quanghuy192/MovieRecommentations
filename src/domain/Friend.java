@@ -1,4 +1,4 @@
-package gradient_descent;
+package domain;
 
 public class Friend {
 	public Friend(String name, int vote) {

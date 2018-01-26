@@ -1,23 +1,29 @@
-package gradient_descent;
+package stochastic_gradient_descent;
+
+import domain.Card;
+import domain.CardInHand;
+import domain.Friend;
+import domain.MovieInfor;
+import utils.CardUtils;
 
 import java.util.List;
 
 public class StochasticGradientDescent {
 
     private final double ALPHA = 0.01;
-    private List<MovieInfor> friendVoteList;
+    private List<CardInHand> cardListTrain;
     private double[] beta;
 
     int[] y;
     int[][] X;
 
-    public StochasticGradientDescent(List<MovieInfor> fVoteList) {
-        this.friendVoteList = fVoteList;
-        int sizeTrain = friendVoteList.size();
+    public StochasticGradientDescent(List<CardInHand> cListTrain) {
+        this.cardListTrain = cListTrain;
+        int sizeTrain = cardListTrain.size();
         int sizeAttr = 0;
 
-        if (friendVoteList.get(0) != null) {
-            sizeAttr = friendVoteList.get(0).getFriendVoteList().size();
+        if (cardListTrain.get(0) != null) {
+            sizeAttr = cardListTrain.size();
         }
 
 
@@ -30,16 +36,16 @@ public class StochasticGradientDescent {
         y = new int[sizeTrain];
         X = new int[sizeTrain][sizeAttr];
         int count = 0;
-        List<Friend> fList;
+        List<Card> cardList;
 
-        for (MovieInfor f : friendVoteList) {
-            y[count] = f.isLike();
-            fList = f.getFriendVoteList();
-            int[] x = new int[fList.size()];
+        for (CardInHand cardInHand : cardListTrain) {
+            y[count] = cardInHand.getResult().ordinal();
+            cardList = cardInHand.getCardList();
+            int[] x = new int[cardList.size()];
             int j = 0;
 
-            for (Friend friend : fList) {
-                x[j] = friend.getVote();
+            for (Card c : cardList) {
+                x[j] = CardUtils.convertToOrderInDeck(c);
                 j++;
             }
 

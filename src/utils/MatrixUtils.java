@@ -1,4 +1,4 @@
-package gradient_descent;
+package utils;
 
 public class MatrixUtils {
 
