@@ -10,7 +10,7 @@ import java.util.List;
 
 public class StochasticGradientDescent {
 
-    private final double ALPHA = 0.01;
+    private final double ALPHA = 0.001;
     private List<CardInHand> cardListTrain;
     private double[] beta;
 
@@ -53,7 +53,7 @@ public class StochasticGradientDescent {
             count++;
         }
 
-        learn(1000);
+        learn(5000);
         System.out.println("Result --------------------- ");
         for (int s = 0; s < beta.length; s++) {
             System.out.print(" " + beta[s]);
