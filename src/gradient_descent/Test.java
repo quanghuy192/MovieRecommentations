@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Test {
 
-    /*public static void main(String[] args) {
+    public static void main2(String[] args) {
         double[] coefficients = {0.4, 0.8};
         double[][] dataset = {
                 {1.0, 1.0},
@@ -43,10 +43,17 @@ public class Test {
             yhat += coef[i + 1] * row[i];
         }
         return yhat;
-    }*/
-
+    }
 
     public static void main(String[] args) {
+        main1(args);
+        // main2(args);
+    }
+
+
+    public static void main1(String[] args) {
+
+
         List<MovieInfor> mVote = new ArrayList<>();
 
         List<Friend> fList1 = new ArrayList<>();
@@ -97,34 +104,35 @@ public class Test {
         }
         System.out.println(Math.round(sum));
 
-/*        List<MovieInfor> mVote = new ArrayList<>();
+        /*
+        List<MovieInfor> mVote = new ArrayList<>();
 
         List<Friend> fList1 = new ArrayList<>();
-        fList1.add(new Friend("A", 1));
-        MovieInfor mInfor1 = new MovieInfor(1, fList1);
+        fList1.add(new Friend("A", 1.0));
+        MovieInfor mInfor1 = new MovieInfor(1.0, fList1);
         mVote.add(mInfor1);
 
         List<Friend> fList2 = new ArrayList<>();
-        fList2.add(new Friend("B", 2));
-        MovieInfor mInfor2 = new MovieInfor(3, fList2);
+        fList2.add(new Friend("B", 2.0));
+        MovieInfor mInfor2 = new MovieInfor(3.0, fList2);
         mVote.add(mInfor2);
 
         List<Friend> fList3 = new ArrayList<>();
-        fList3.add(new Friend("C", 4));
-        MovieInfor mInfor3 = new MovieInfor(3, fList3);
+        fList3.add(new Friend("C", 4.0));
+        MovieInfor mInfor3 = new MovieInfor(3.0, fList3);
         mVote.add(mInfor3);
 
         List<Friend> fList4 = new ArrayList<>();
-        fList4.add(new Friend("D", 3));
-        MovieInfor mInfor4 = new MovieInfor(2, fList4);
+        fList4.add(new Friend("D", 3.0));
+        MovieInfor mInfor4 = new MovieInfor(2.0, fList4);
         mVote.add(mInfor4);
 
         List<Friend> fList5 = new ArrayList<>();
-        fList5.add(new Friend("E", 5));
-        MovieInfor mInfor5 = new MovieInfor(5, fList5);
+        fList5.add(new Friend("E", 5.0));
+        MovieInfor mInfor5 = new MovieInfor(5.0, fList5);
         mVote.add(mInfor5);
 
-        new StochasticGradientDescent(mVote);*/
+        new StochasticGradientDescent(mVote); */
     }
 
 }

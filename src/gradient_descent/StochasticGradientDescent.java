@@ -4,12 +4,12 @@ import java.util.List;
 
 public class StochasticGradientDescent {
 
-    private final double ALPHA = 0.01;
+    private final double ALPHA = 0.001;
     private List<MovieInfor> friendVoteList;
     private double[] beta;
 
-    int[] y;
-    int[][] X;
+    double[] y;
+    double[][] X;
 
     public StochasticGradientDescent(List<MovieInfor> fVoteList) {
         this.friendVoteList = fVoteList;
@@ -27,15 +27,15 @@ public class StochasticGradientDescent {
             beta[i] = 0.0d;
         }
 
-        y = new int[sizeTrain];
-        X = new int[sizeTrain][sizeAttr];
+        y = new double[sizeTrain];
+        X = new double[sizeTrain][sizeAttr];
         int count = 0;
         List<Friend> fList;
 
         for (MovieInfor f : friendVoteList) {
             y[count] = f.isLike();
             fList = f.getFriendVoteList();
-            int[] x = new int[fList.size()];
+            double[] x = new double[fList.size()];
             int j = 0;
 
             for (Friend friend : fList) {
@@ -47,7 +47,7 @@ public class StochasticGradientDescent {
             count++;
         }
 
-        learn(1000);
+        learn(10000);
         System.out.println("Result --------------------- ");
         for (int s = 0; s < beta.length; s++) {
             System.out.print(" " + beta[s]);
