@@ -2,7 +2,7 @@ package stochastic_gradient_descent;
 
 import domain.Card;
 import domain.CardInHand;
-import utils.CardUtils;
+import domain.Deck;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class StochasticGradientDescent {
         X = new int[sizeTrain][sizeAttr];
         int count = 0;
         List<Card> cardList;
-        CardUtils cardUtils = new CardUtils();
+        Deck cardUtils = new Deck();
 
         for (CardInHand cardInHand : cardListTrain) {
             y[count] = cardInHand.getResult().ordinal();

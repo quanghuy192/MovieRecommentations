@@ -2,7 +2,7 @@ package data;
 
 import domain.Card;
 import domain.CardInHand;
-import utils.CardUtils;
+import domain.Deck;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class ExpUtils {
     }
 
     public void writeDataTrainning(CardInHand cardInHands) {
-        CardUtils cardUtils = new CardUtils();
+        Deck cardUtils = new Deck();
         try {
             writer = new FileWriter(file);
             bufferedWriter = new BufferedWriter(writer);

@@ -46,7 +46,6 @@ public class Card {
 
         Card card = (Card) obj;
         return (card.value == value
-                && card.isChoose == isChoose
                 && card.type.ordinal() == type.ordinal());
     }
 

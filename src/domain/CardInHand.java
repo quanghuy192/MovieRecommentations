@@ -1,7 +1,5 @@
 package domain;
 
-import utils.CardUtils;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +22,7 @@ public class CardInHand {
         this.resultStatus = getResult(Integer.parseInt(values[SIZE - 1]));
         cardList = new ArrayList<>();
 
-        CardUtils cardUtils = new CardUtils();
+        Deck cardUtils = new Deck();
         for (int i = 0; i < values.length - 1; i++) {
             Card c;
             Iterator it = cardUtils.getMapCard().entrySet().iterator();
