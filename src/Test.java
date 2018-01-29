@@ -1,3 +1,4 @@
+import data.ExpUtils;
 import domain.*;
 import stochastic_gradient_descent.StochasticGradientDescent;
 import utils.CardUtils;
@@ -49,6 +50,25 @@ public class Test {
 
 
     public static void main(String[] args) {
+        ExpUtils utils = new ExpUtils();
+        List<CardInHand> mVote = utils.readDataTrainning();
+
+        StochasticGradientDescent sgd = new StochasticGradientDescent(mVote);
+
+        double[] coefficients = sgd.getCoefficients();
+        System.out.println("\n\n\n");
+
+        double[] xTrain = {5, 2, 3, 1, 2, 5, 7, 8, 9};
+        double sum = coefficients[0];
+        for (int i = 0; i < coefficients.length - 1; i++) {
+            sum += xTrain[i] * coefficients[i + 1];
+        }
+        System.out.println(CardInHand.getResult(Math.round(sum)));
+
+        // createData();
+    }
+
+    public static void createData() {
         List<CardInHand> mVote = new ArrayList<>();
 
         List<Card> fList1 = new ArrayList<>();
@@ -121,62 +141,9 @@ public class Test {
         CardInHand mInfor5 = new CardInHand(ResultStatus.ADD, fList5);
         mVote.add(mInfor5);
 
-        StochasticGradientDescent sgd = new StochasticGradientDescent(mVote);
-
-        double[] coefficients = sgd.getCoefficients();
-        System.out.println("\n\n\n");
-
-        double[] xTrain = {5, 2, 3, 1, 2, 5, 7, 8, 9};
-        double sum = coefficients[0];
-        for (int i = 0; i < coefficients.length - 1; i++) {
-            sum += xTrain[i] * coefficients[i + 1];
-        }
-        System.out.println(getResult(Math.round(sum)));
-
-
-/*        List<domain.MovieInfor> mVote = new ArrayList<>();
-
-        List<domain.Friend> fList1 = new ArrayList<>();
-        fList1.add(new domain.Friend("A", 1));
-        domain.MovieInfor mInfor1 = new domain.MovieInfor(1, fList1);
-        mVote.add(mInfor1);
-
-        List<domain.Friend> fList2 = new ArrayList<>();
-        fList2.add(new domain.Friend("B", 2));
-        domain.MovieInfor mInfor2 = new domain.MovieInfor(3, fList2);
-        mVote.add(mInfor2);
-
-        List<domain.Friend> fList3 = new ArrayList<>();
-        fList3.add(new domain.Friend("C", 4));
-        domain.MovieInfor mInfor3 = new domain.MovieInfor(3, fList3);
-        mVote.add(mInfor3);
-
-        List<domain.Friend> fList4 = new ArrayList<>();
-        fList4.add(new domain.Friend("D", 3));
-        domain.MovieInfor mInfor4 = new domain.MovieInfor(2, fList4);
-        mVote.add(mInfor4);
-
-        List<domain.Friend> fList5 = new ArrayList<>();
-        fList5.add(new domain.Friend("E", 5));
-        domain.MovieInfor mInfor5 = new domain.MovieInfor(5, fList5);
-        mVote.add(mInfor5);
-
-        new stochastic_gradient_descent.StochasticGradientDescent(mVote);*/
-
-    }
-
-    public static ResultStatus getResult(long i) {
-        switch ((int) i) {
-            case 0:
-                return ResultStatus.ADD;
-            case 1:
-                return ResultStatus.ADD_ALL;
-            case 2:
-                return ResultStatus.FOLLOW;
-            case 3:
-                return ResultStatus.DENY;
-            default:
-                throw new IllegalArgumentException();
+        ExpUtils utils = new ExpUtils();
+        for (CardInHand c : mVote) {
+            utils.writeDataTrainning(c);
         }
     }
 }
