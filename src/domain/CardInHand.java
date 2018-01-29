@@ -21,7 +21,7 @@ public class CardInHand {
 
     public CardInHand(String[] values) {
         super();
-        this.resultStatus = getResult(Integer.parseInt(values[SIZE]));
+        this.resultStatus = getResult(Integer.parseInt(values[SIZE - 1]));
         cardList = new ArrayList<>();
 
         CardUtils cardUtils = new CardUtils();

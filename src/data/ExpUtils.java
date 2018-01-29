@@ -15,7 +15,7 @@ public class ExpUtils {
     private FileWriter writer;
     private BufferedWriter bufferedWriter;
     private final String EXP_FILE = "exp.txt";
-    private final String BLANK = "";
+    private final String BLANK = " ";
     File file = new File(EXP_FILE);
 
     public ExpUtils() {
@@ -38,8 +38,6 @@ public class ExpUtils {
             return lineList;
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            closeReader();
         }
         return lineList;
     }

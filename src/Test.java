@@ -52,6 +52,7 @@ public class Test {
     public static void main(String[] args) {
         ExpUtils utils = new ExpUtils();
         List<CardInHand> mVote = utils.readDataTrainning();
+        utils.closeReader();
 
         StochasticGradientDescent sgd = new StochasticGradientDescent(mVote);
 
