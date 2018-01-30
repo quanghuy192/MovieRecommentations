@@ -9,26 +9,43 @@ public class Player {
 
     private String name;
     private CardInHand cardInHand;
-    private List<Card> listCard3, listCard;
-    private static short[] existCard;
-    private static List<HashMap<Card, Boolean>> currentListCard;
+    private int[] sum10Cards;
+    private List<Map<Card, Boolean>> finalChoiceCards;
 
-    private static final short N = 5;
-    private static final short K = 3;
+    private final int N = 5;
+    private final int K = 3;
 
-    private static boolean isFinish = false;
+    private boolean isFinish = false;
 
     public Player(String name, CardInHand cardInHand) {
         this.name = name;
         this.cardInHand = cardInHand;
+
+        sum10Cards = new int[K];
+        for (int i = 1; i <= K; i++) {
+            sum10Cards[i - 1] = i;
+        }
+
+        finalChoiceCards = new ArrayList<>();
+        int size = cardInHand.getCardList().size();
+
+        HashMap<Card, Boolean> map;
+
+        for (int i = 0; i < size; i++) {
+            map = new HashMap<>();
+            map.put(cardInHand.getCardList().get(i), false);
+
+            finalChoiceCards.add(map);
+        }
     }
 
-    public void prepare() {
+    public List<Map<Card, Boolean>> execute() {
         if (checkContainType369Diamonds()) {
-            getBestChoiceWithDiamond();
+            actionBestChoiceWithDiamond();
         } else {
-            getBestChoiceNoneDiamond();
+            actionBestChoiceNoneDiamond();
         }
+        return finalChoiceCards;
     }
 
     public boolean checkContainType369Diamonds() {
@@ -43,23 +60,23 @@ public class Player {
         return false;
     }
 
-    public void getBestChoiceWithDiamond() {
+    public void actionBestChoiceWithDiamond() {
 
     }
 
-    public void getBestChoiceNoneDiamond() {
+    public void actionBestChoiceNoneDiamond() {
         List<Card> listCard = cardInHand.getCardList();
-        short max = -1;
+        int max = -1;
 
         do {
-            short point = 0;
+            int point = 0;
             Card card;
             Map<Card, Boolean> map;
             List<Card> tempList = new ArrayList<>();
             List<Card> cloneCard = new ArrayList<>(listCard);
 
             for (int i = 0; i < K; i++) {
-                int position = existCard[i];
+                int position = sum10Cards[i];
                 card = listCard.get(position - 1);
                 point += card.getValue();
                 tempList.add(card);
@@ -68,25 +85,23 @@ public class Player {
                 cloneCard.remove(card);
             }
 
-            short tempOfMax = 0;
+            int tempOfMax = 0;
             for (Card c : cloneCard) {
                 tempOfMax += c.getValue();
             }
 
             if (mod10(point) && remainerOf10(tempOfMax) > max) {
 
-                currentListCard.removeAll(currentListCard);
-
+                finalChoiceCards.removeAll(finalChoiceCards);
                 for (Card c : tempList) {
                     map = new HashMap<>();
                     map.put(c, true);
-                    // currentListCard.add(map);
+                    finalChoiceCards.add(map);
                 }
-
                 for (Card c : cloneCard) {
                     map = new HashMap<>();
                     map.put(c, false);
-                    // currentListCard.add(map);
+                    finalChoiceCards.add(map);
                 }
 
                 max = remainerOf10(tempOfMax);
@@ -96,6 +111,10 @@ public class Player {
             try {
                 // generate
                 nextCombination();
+                for (int i = 0; i < sum10Cards.length; i++) {
+                    System.out.print(" " + sum10Cards[i]);
+                }
+                System.out.println("\n");
             } catch (Exception e) {
                 // Finish Generate
             }
@@ -103,31 +122,29 @@ public class Player {
         } while (!isFinish);
     }
 
-    private static void nextCombination() {
-
-        short i, j;
+    public void nextCombination() {
+        int i, j;
         i = K;
-        while (i >= 0 && existCard[i - 1] == N - K + i)
+        while (i > 0 && sum10Cards[i - 1] == N - K + i)
             i--;
-
-        if (i >= 0) {
-            existCard[i - 1] = (short) (existCard[i - 1] + 1);
-            for (j = (short) (i - 1 + 1); j < K; j++) {
-                existCard[j] = (short) (existCard[i - 1] + j - (i - 1));
+        if (i > 0) {
+            sum10Cards[i - 1] = (sum10Cards[i - 1] + 1);
+            for (j = (i - 1 + 1); j < K; j++) {
+                sum10Cards[j] = (sum10Cards[i - 1] + j - (i - 1));
             }
         } else {
             isFinish = true;
         }
     }
 
-    private static boolean mod10(short point) {
+    private static boolean mod10(int point) {
         if (point % 10 == 0) {
             return true;
         }
         return false;
     }
 
-    private static short remainerOf10(short value) {
-        return (value != 10) ? (short) (value % 10) : value;
+    private static int remainerOf10(int value) {
+        return (value != 10) ? (value % 10) : value;
     }
 }

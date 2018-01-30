@@ -4,6 +4,7 @@ import stochastic_gradient_descent.StochasticGradientDescent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Test {
 
@@ -66,7 +67,20 @@ public class Test {
         System.out.println(CardInHand.getResult(Math.round(sum)));
 
         // createData();
+
+        List<Card> lCard = new ArrayList<>();
+        lCard.add(new Card(5, Type.SPADE));
+        lCard.add(new Card(3, Type.HEARTS));
+        lCard.add(new Card(2, Type.DIAMONDS));
+        lCard.add(new Card(8, Type.SPADE));
+        lCard.add(new Card(7, Type.CLUBS));
+        CardInHand cIH = new CardInHand(ResultStatus.FOLLOW, lCard);
+        Player p = new Player("Huy", cIH);
+
+        List<Map<Card, Boolean>> finalChoiceCards = p.execute();
+        System.out.println("Done !!!");
     }
+
 
     public static void createData() {
         List<CardInHand> mVote = new ArrayList<>();
