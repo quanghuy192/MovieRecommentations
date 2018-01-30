@@ -1,5 +1,8 @@
 package domain;
 
+import data.ExpUtils;
+import stochastic_gradient_descent.StochasticGradientDescent;
+
 import java.util.*;
 
 public class Player {
@@ -22,6 +25,10 @@ public class Player {
         for (int i = 1; i <= K; i++) {
             sum10Cards[i - 1] = i;
         }
+    }
+
+    public CardInHand getCardInHand() {
+        return cardInHand;
     }
 
     public List<Map<Card, Boolean>> execute() {
@@ -141,7 +148,7 @@ public class Player {
         for (Card c : cards) {
             point += c.getValue();
         }
-        return point;
+        return remainerOf10(point);
     }
 
     public List<Card> getListCardResult(boolean isPoint) {
@@ -155,6 +162,22 @@ public class Player {
             }
         }
         return cards;
+    }
+
+    public ResultStatus answer(List<Card> cards, StochasticGradientDescent sgd) {
+        double[] coefficients = sgd.getCoefficients();
+        System.out.println("\n\n\n");
+
+        List<Double> info = new ArrayList<>();
+        for (Card c : cards) {
+            info.add(c.getValue() * 1.0);
+        }
+
+        double sum = coefficients[0];
+        for (int i = 0; i < coefficients.length - 1; i++) {
+            sum += info.get(i) * coefficients[i + 1];
+        }
+        return CardInHand.getResult(Math.round(sum));
     }
 
     private static int remainerOf10(int value) {
