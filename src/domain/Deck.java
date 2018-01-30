@@ -5,7 +5,7 @@ import java.util.*;
 public class Deck {
 
     private HashMap<Card, Integer> mapCard = new HashMap<>();
-    private Stack<Card> deck = new Stack<>();
+    private Stack<Card> deck;
 
     public Deck() {
         mapCard.put(new Card(1, Type.SPADE), 1);
@@ -73,10 +73,16 @@ public class Deck {
     public void shuffleDeck() {
         List<Card> listCard = new ArrayList<>(mapCard.keySet());
         Collections.shuffle(listCard);
+        deck = new Stack<>();
         deck.addAll(listCard);
     }
 
     public Card getCardFromDeck() {
+
+        if (deck == null || deck.isEmpty()) {
+            shuffleDeck();
+        }
+
         return deck.pop();
     }
 }

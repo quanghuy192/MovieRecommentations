@@ -48,40 +48,6 @@ public class Test {
         return yhat;
     }*/
 
-
-    public static void main(String[] args) {
-        ExpUtils utils = new ExpUtils();
-        List<CardInHand> mVote = utils.readDataTrainning();
-        utils.closeReader();
-
-        StochasticGradientDescent sgd = new StochasticGradientDescent(mVote);
-
-        double[] coefficients = sgd.getCoefficients();
-        System.out.println("\n\n\n");
-
-        double[] xTrain = {5, 2, 3, 1, 2, 5, 7, 8, 9};
-        double sum = coefficients[0];
-        for (int i = 0; i < coefficients.length - 1; i++) {
-            sum += xTrain[i] * coefficients[i + 1];
-        }
-        System.out.println(CardInHand.getResult(Math.round(sum)));
-
-        // createData();
-
-        List<Card> lCard = new ArrayList<>();
-        lCard.add(new Card(5, Type.SPADE));
-        lCard.add(new Card(3, Type.HEARTS));
-        lCard.add(new Card(2, Type.DIAMONDS));
-        lCard.add(new Card(8, Type.SPADE));
-        lCard.add(new Card(7, Type.CLUBS));
-        CardInHand cIH = new CardInHand(ResultStatus.FOLLOW, lCard);
-        Player p = new Player("Huy", cIH);
-
-        List<Map<Card, Boolean>> finalChoiceCards = p.execute();
-        System.out.println("Done !!!");
-    }
-
-
     public static void createData() {
         List<CardInHand> mVote = new ArrayList<>();
 
@@ -159,5 +125,37 @@ public class Test {
         for (CardInHand c : mVote) {
             utils.writeDataTrainning(c);
         }
+    }
+
+    public static void main(String[] args) {
+        ExpUtils utils = new ExpUtils();
+        List<CardInHand> mVote = utils.readDataTrainning();
+        utils.closeReader();
+
+        StochasticGradientDescent sgd = new StochasticGradientDescent(mVote);
+
+        double[] coefficients = sgd.getCoefficients();
+        System.out.println("\n\n\n");
+
+        double[] xTrain = {5, 2, 3, 1, 2, 5, 7, 8, 9};
+        double sum = coefficients[0];
+        for (int i = 0; i < coefficients.length - 1; i++) {
+            sum += xTrain[i] * coefficients[i + 1];
+        }
+        System.out.println(CardInHand.getResult(Math.round(sum)));
+
+        // createData();
+
+        List<Card> lCard = new ArrayList<>();
+        lCard.add(new Card(5, Type.SPADE));
+        lCard.add(new Card(3, Type.HEARTS));
+        lCard.add(new Card(2, Type.DIAMONDS));
+        lCard.add(new Card(8, Type.SPADE));
+        lCard.add(new Card(7, Type.CLUBS));
+        CardInHand cIH = new CardInHand(ResultStatus.FOLLOW, lCard);
+        Player p = new Player("Huy", cIH);
+
+        List<Map<Card, Boolean>> finalChoiceCards = p.execute();
+        System.out.println("Done !!!");
     }
 }

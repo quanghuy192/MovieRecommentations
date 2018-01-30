@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Player {
 
@@ -24,18 +21,6 @@ public class Player {
         sum10Cards = new int[K];
         for (int i = 1; i <= K; i++) {
             sum10Cards[i - 1] = i;
-        }
-
-        finalChoiceCards = new ArrayList<>();
-        int size = cardInHand.getCardList().size();
-
-        HashMap<Card, Boolean> map;
-
-        for (int i = 0; i < size; i++) {
-            map = new HashMap<>();
-            map.put(cardInHand.getCardList().get(i), false);
-
-            finalChoiceCards.add(map);
         }
     }
 
@@ -122,7 +107,7 @@ public class Player {
         } while (!isFinish);
     }
 
-    public void nextCombination() {
+    private void nextCombination() {
         int i, j;
         i = K;
         while (i > 0 && sum10Cards[i - 1] == N - K + i)
@@ -142,6 +127,34 @@ public class Player {
             return true;
         }
         return false;
+    }
+
+    public Card showCard() {
+        List<Card> cards = getListCardResult(true);
+        Random r = new Random();
+        return cards.get(r.nextInt(1));
+    }
+
+    public int showPoint() {
+        List<Card> cards = getListCardResult(true);
+        int point = 0;
+        for (Card c : cards) {
+            point += c.getValue();
+        }
+        return point;
+    }
+
+    public List<Card> getListCardResult(boolean isPoint) {
+        List<Card> cards = new ArrayList<>();
+        for (Map<Card, Boolean> m : finalChoiceCards) {
+            List<Card> tempKey = new ArrayList<>(m.keySet());
+            Card c = tempKey.get(0);
+            boolean k = m.get(c);
+            if (k == isPoint) {
+                cards.add(c);
+            }
+        }
+        return cards;
     }
 
     private static int remainerOf10(int value) {
