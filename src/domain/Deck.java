@@ -78,11 +78,9 @@ public class Deck {
     }
 
     public Card getCardFromDeck() {
-
         if (deck == null || deck.isEmpty()) {
             shuffleDeck();
         }
-
         return deck.pop();
     }
 }

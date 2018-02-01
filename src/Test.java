@@ -137,16 +137,18 @@ public class Test {
         double[] coefficients = sgd.getCoefficients();
         System.out.println("\n\n\n");
 
-        double[] xTrain = {5, 2, 3, 1, 2, 5, 7, 8, 9};
+        double[] xTrain = {5, 14, 3, 1, 2, 22, 7, 8, 9};
         double sum = coefficients[0];
         for (int i = 0; i < coefficients.length - 1; i++) {
             sum += xTrain[i] * coefficients[i + 1];
+            System.out.println("xTrain[" + i + "] = " + xTrain[i] + " * " + "coefficients[" + (i + 1) + "] = " + xTrain[i] * coefficients[i + 1]);
         }
-        System.out.println(CardInHand.getResult(Math.round(sum)));
+        System.out.println(Math.round(sum));
+        // System.out.println(CardInHand.getResult(Math.round(sum)));
 
         // createData();
 
-        List<Card> lCard = new ArrayList<>();
+        /*List<Card> lCard = new ArrayList<>();
         lCard.add(new Card(5, Type.SPADE));
         lCard.add(new Card(3, Type.HEARTS));
         lCard.add(new Card(2, Type.DIAMONDS));
@@ -156,6 +158,6 @@ public class Test {
         Player p = new Player("Huy", cIH);
 
         List<Map<Card, Boolean>> finalChoiceCards = p.execute();
-        System.out.println("Done !!!");
+        System.out.println("Done !!!");*/
     }
 }

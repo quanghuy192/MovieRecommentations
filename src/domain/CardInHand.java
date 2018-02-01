@@ -28,7 +28,8 @@ public class CardInHand {
             Iterator it = cardUtils.getMapCard().entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
-                if (pair.getValue().equals(i)) {
+                int value = (int) pair.getValue();
+                if (value == Integer.parseInt(values[i])) {
                     c = (Card) pair.getKey();
                     cardList.add(c);
                 }

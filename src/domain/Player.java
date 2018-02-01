@@ -1,6 +1,5 @@
 package domain;
 
-import data.ExpUtils;
 import stochastic_gradient_descent.StochasticGradientDescent;
 
 import java.util.*;

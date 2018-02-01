@@ -8,7 +8,7 @@ import java.util.List;
 
 public class StochasticGradientDescent {
 
-    private final double ALPHA = 0.001;
+    private final double ALPHA = 0.0001;
     private List<CardInHand> cardListTrain;
     private double[] beta;
 
@@ -21,7 +21,7 @@ public class StochasticGradientDescent {
         int sizeAttr = 0;
 
         if (cardListTrain.get(0) != null) {
-            sizeAttr = cardListTrain.size();
+            sizeAttr = cardListTrain.get(0).getCardList().size();
         }
 
         // create data
@@ -51,7 +51,7 @@ public class StochasticGradientDescent {
             count++;
         }
 
-        learn(5000);
+        learn(20000);
         System.out.println("Result --------------------- ");
         for (int s = 0; s < beta.length; s++) {
             System.out.print(" " + beta[s]);
