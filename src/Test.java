@@ -137,7 +137,7 @@ public class Test {
         double[] coefficients = sgd.getCoefficients();
         System.out.println("\n\n\n");
 
-        double[] xTrain = {5, 14, 3, 1, 2, 22, 7, 8, 9};
+        double[] xTrain = {5, 14, 48, 23, 24, 22, 7, 8, 9};
         double sum = coefficients[0];
         for (int i = 0; i < coefficients.length - 1; i++) {
             sum += xTrain[i] * coefficients[i + 1];
