@@ -8,15 +8,15 @@ public class Deck {
     private Stack<Card> deck;
 
     public Deck() {
-        mapCard.put(new Card(1, Type.SPADE), 1);
-        mapCard.put(new Card(2, Type.SPADE), 2);
-        mapCard.put(new Card(3, Type.SPADE), 3);
-        mapCard.put(new Card(4, Type.SPADE), 4);
-        mapCard.put(new Card(5, Type.SPADE), 5);
-        mapCard.put(new Card(6, Type.SPADE), 6);
-        mapCard.put(new Card(7, Type.SPADE), 7);
-        mapCard.put(new Card(8, Type.SPADE), 8);
-        mapCard.put(new Card(9, Type.SPADE), 9);
+        mapCard.put(new Card(1, Type.SPADES), 1);
+        mapCard.put(new Card(2, Type.SPADES), 2);
+        mapCard.put(new Card(3, Type.SPADES), 3);
+        mapCard.put(new Card(4, Type.SPADES), 4);
+        mapCard.put(new Card(5, Type.SPADES), 5);
+        mapCard.put(new Card(6, Type.SPADES), 6);
+        mapCard.put(new Card(7, Type.SPADES), 7);
+        mapCard.put(new Card(8, Type.SPADES), 8);
+        mapCard.put(new Card(9, Type.SPADES), 9);
         // mapCard.put(new Card(10, Type.SPADE), 10);
         // mapCard.put(new Card(11, Type.SPADE), 11);
         // mapCard.put(new Card(12, Type.SPADE), 12);

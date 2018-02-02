@@ -1,13 +1,13 @@
 package domain;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class Card {
 
     private int value;
     private boolean isChoose;
     private Type type;
-
-    public Card() {
-    }
 
     public Card(int value, Type type) {
         super();
@@ -24,10 +24,6 @@ public class Card {
 
     public int getValue() {
         return value;
-    }
-
-    public boolean isChoose() {
-        return isChoose;
     }
 
     public Type getType() {
@@ -63,7 +59,7 @@ public class Card {
         } else if (type.ordinal() == Type.HEARTS.ordinal()) {
 
             valuesOfType = 19;
-        } else if (type.ordinal() == Type.SPADE.ordinal()) {
+        } else if (type.ordinal() == Type.SPADES.ordinal()) {
 
             valuesOfType = 23;
         } else if (type.ordinal() == Type.CLUBS.ordinal()) {
@@ -80,5 +76,4 @@ public class Card {
 
         return result;
     }
-
 }

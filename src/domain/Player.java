@@ -24,6 +24,7 @@ public class Player {
         for (int i = 1; i <= K; i++) {
             sum10Cards[i - 1] = i;
         }
+        finalChoiceCards = new ArrayList<>();
     }
 
     public CardInHand getCardInHand() {
@@ -32,7 +33,8 @@ public class Player {
 
     public List<Map<Card, Boolean>> execute() {
         if (checkContainType369Diamonds()) {
-            actionBestChoiceWithDiamond();
+            // actionBestChoiceWithDiamond();
+            actionBestChoiceNoneDiamond();
         } else {
             actionBestChoiceNoneDiamond();
         }
@@ -102,10 +104,10 @@ public class Player {
             try {
                 // generate
                 nextCombination();
-                for (int i = 0; i < sum10Cards.length; i++) {
+                /*for (int i = 0; i < sum10Cards.length; i++) {
                     System.out.print(" " + sum10Cards[i]);
                 }
-                System.out.println("\n");
+                System.out.println("\n");*/
             } catch (Exception e) {
                 // Finish Generate
             }
